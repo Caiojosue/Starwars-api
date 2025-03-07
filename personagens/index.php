@@ -18,7 +18,6 @@
 </head>
 <body>
 
-<!-- Formulário para filtrar por gênero -->
 <form method="GET" action="" style="display: flex; justify-content: flex-end; margin: 1%;">
     <label for="genero" style="margin-right: 5px;">Filtrar por gênero:</label>
     <select name="genero" id="genero" style="margin-right: 5px;">
@@ -45,7 +44,6 @@
         $resultado = json_decode(file_get_contents($url));
 
         foreach($resultado->results as $personagem){
-            // Aplica o filtro de gênero
             if ($filtro_genero && $personagem->gender !== $filtro_genero) {
                 continue;
             }
@@ -53,7 +51,7 @@
             echo "
             <tr>
                 <td>
-                    <a href='./personagem/index.php?search=" . urlencode($personagem->name) . "'>
+                    <a href='./pesquisa-personagem/index.php?search=" . urlencode($personagem->name) . "'>
                         $personagem->name
                     </a>
                 </td>

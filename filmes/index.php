@@ -65,7 +65,6 @@
     }
 
     foreach ($resultado->results as $filme) {
-        // Se o usuário buscou por um personagem, verifica se ele está no filme
         if (!empty($personagem_nome)) {
             $personagem_encontrado = false;
             foreach ($filme->characters as $url_personagem) {
@@ -76,7 +75,7 @@
                 }
             }
             if (!$personagem_encontrado) {
-                continue; // Pula o filme se o personagem não estiver nele
+                continue;
             }
         }
 

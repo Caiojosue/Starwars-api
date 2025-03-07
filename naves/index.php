@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&family=Odibee+Sans&display=swap" rel="stylesheet">
     <link href="../css/font.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="https://swapi.dev/static/favicon.ico">
     <title>SWAPI - Espécies</title>
 </head>
 <body>
@@ -26,151 +25,50 @@
             <th>Máx. Peso</th>
             <th>Passageiros</th>
         </tr>
+
 <?php
     $url = "https://swapi.dev/api/starships/";
-    $resultado = json_decode(file_get_contents($url));
+    $todas_naves = [];
 
-    foreach($resultado->results as $nave){
-        echo "
-        <tr>
-            <td>
-                $nave->name
-            </td>
-
-            <td>
-                $nave->model
-            </td>
-
-            <td>
-                $nave->starship_class
-            </td>
-        
-            <td>
-                $nave->max_atmosphering_speed 
-            </td>
-
-            <td>
-                $nave->cargo_capacity 
-            </td>
-
-            <td>
-                $nave->passengers 
-            </td> 
-        ";
+    while ($url) {
+        $resultado = json_decode(file_get_contents($url));
+        $todas_naves = array_merge($todas_naves, $resultado->results);
+        $url = $resultado->next; 
     }
 
-    $url = "https://swapi.dev/api/starships/?page=2";
-    $resultado = json_decode(file_get_contents($url));
 
-    foreach($resultado->results as $nave){
-        echo "
-        <tr>
-            <td>
-                $nave->name
-            </td>
+    usort($todas_naves, function ($a, $b) {
+        return intval($a->passengers) - intval($b->passengers);
+    });
 
-            <td>
-                $nave->model
-            </td>
-
-            <td>
-                $nave->starship_class
-            </td>
-        
-            <td>
-                $nave->max_atmosphering_speed 
-            </td>
-
-            <td>
-                $nave->cargo_capacity 
-            </td>
-
-            <td>
-                $nave->passengers 
-            </td> 
-        ";
-    }
-
-    $url = "https://swapi.dev/api/starships/?page=3";
-    $resultado = json_decode(file_get_contents($url));
-
-    foreach($resultado->results as $nave){
-        echo "
-        <tr>
-            <td>
-                $nave->name
-            </td>
-
-            <td>
-                $nave->model
-            </td>
-
-            <td>
-                $nave->starship_class
-            </td>
-        
-            <td>
-                $nave->max_atmosphering_speed 
-            </td>
-
-            <td>
-                $nave->cargo_capacity 
-            </td>
-
-            <td>
-                $nave->passengers 
-            </td> 
-        ";
-    }
-
-    $url = "https://swapi.dev/api/starships/?page=4";
-    $resultado = json_decode(file_get_contents($url));
-
-    foreach($resultado->results as $nave){
-        echo "
-        <tr>
-            <td>
-                $nave->name
-            </td>
-
-            <td>
-                $nave->model
-            </td>
-
-            <td>
-                $nave->starship_class
-            </td>
-        
-            <td>
-                $nave->max_atmosphering_speed 
-            </td>
-
-            <td>
-                $nave->cargo_capacity 
-            </td>
-
-            <td>
-                $nave->passengers 
-            </td> 
-        ";
+    foreach ($todas_naves as $nave) {
+        echo "<tr>
+                <td>{$nave->name}</td>
+                <td>{$nave->model}</td>
+                <td>{$nave->starship_class}</td>
+                <td>{$nave->max_atmosphering_speed}</td>
+                <td>{$nave->cargo_capacity}</td>
+                <td>{$nave->passengers}</td>
+              </tr>";
     }
 ?>
-</table>
-<br>
-<center>
-    <a href="../index.php" class="link">
-        <i class="fa fa-arrow-left"></i>
-        <br><br>Voltar à página inicial!
-    </a>
-</center>
+    </table>
 
-<div class="footer-basic" style="margin-top: 24px">
-    <footer>
-        <div class="social">
-            <a href="https://github.com/Caiojosue/"><i class="icon ion-social-github"></i></a>
-            <a href="https://www.linkedin.com/in/caio-sando-14ba1a2b5/"><i class="icon ion-social-linkedin"></i></a>
-        </div>
-    </footer>
-</div>
+    <br>
+    <center>
+        <a href="../index.php" class="link">
+            <i class="fa fa-arrow-left"></i>
+            <br><br>Voltar à página inicial!
+        </a>
+    </center>
+
+    <div class="footer-basic" style="margin-top: 24px">
+        <footer>
+            <div class="social">
+                <a href="https://github.com/Caiojosue/"><i class="icon ion-social-github"></i></a>
+                <a href="https://www.linkedin.com/in/caio-sando-14ba1a2b5/"><i class="icon ion-social-linkedin"></i></a>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
