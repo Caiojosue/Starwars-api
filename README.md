@@ -69,6 +69,7 @@ Antes de começar, você precisará ter os seguintes itens instalados na sua má
 
 - Na tabela de personagem, para mais informações sobre...Clicar em cima do nome de cada personagem, para informações completas
 
+- Ao fazer a filtragem de personagem em um filme, poderá haver um certo delay para pesquisa dos filmes
 ---
 
 ## 📂 Estrutura do Projeto
